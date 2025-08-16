@@ -102,7 +102,7 @@ export default function SignupForm() {
 
   const completeSignup = async (jsonUrl) => {
     try {
-      const response = await axios.post('http://localhost:8000/api/user/signup', {
+      const response = await axios.post('https://mission-parivartan-3.onrender.com/api/user/signup', {
         name,
         password,
         url: jsonUrl,
