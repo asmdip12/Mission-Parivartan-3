@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation, NavLink } from "react-router-dom";
+import { Link, useLocation, NavLink  ,useNavigate} from "react-router-dom";
 import LoginModal from "./LoginModal";
 import RegisterModal from "./Register";
 import { useAuth } from "./AuthContext";
@@ -21,6 +21,14 @@ export default function Navbar() {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+  
+    const navigate = useNavigate();
+  
+    const logoutHandler = () => {
+      logout(); // your logout logic
+      navigate("/"); // go to homepage
+    };
+  
 
   return (
     <>
@@ -40,21 +48,21 @@ export default function Navbar() {
           {/* Desktop Navigation Links */}
           <div className="navbar-links">
             <Link to="/about" className="nav-link">
-              <span className="nav-icon">ℹ️</span>
+              <span className="nav-icon"></span>
               <span>About</span>
             </Link>
             <Link to="/whymp" className="nav-link">
-              <span className="nav-icon">❓</span>
+              <span className="nav-icon"></span>
               <span>WhyMP</span>
             </Link>
-            <Link to="/gallery" className="nav-link">
+            {/* <Link to="/gallery" className="nav-link">
               <span className="nav-icon">📸</span>
               <span>Gallery</span>
             </Link>
             <Link to="/contact" className="nav-link">
               <span className="nav-icon">📧</span>
               <span>Contact</span>
-            </Link>
+            </Link> */}
           </div>
 
           {/* Auth Section */}
@@ -64,12 +72,12 @@ export default function Navbar() {
                 <>
                   
                     <NavLink to="/login" className="auth-btn login-btn">
-                      <span className="btn-icon">🔐</span>
+                      <span className="btn-icon"></span>
                       <span>LogIn</span>
                     </NavLink>
                   
                     <NavLink to="/signup" className="auth-btn signup-btn">
-                      <span className="btn-icon">✨</span>
+                      <span className="btn-icon"></span>
                       <span>SignUp</span>
                     </NavLink>
                  
@@ -77,12 +85,12 @@ export default function Navbar() {
               )}
               {auth.isAuthenticated && (
                 <>
-                  <li>
-                    <button onClick={logout} className="auth-btn logout-btn">
+                  
+                    <button onClick={logoutHandler} className="auth-btn logout-btn">
                       <span className="btn-icon">👋</span>
                       <span>Logout</span>
                     </button>
-                  </li>
+                  
                 </>
               )}
             </ul>
@@ -103,38 +111,38 @@ export default function Navbar() {
           <div className="mobile-menu-content">
             <div className="mobile-nav-links">
               <Link to="/about" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                <span className="nav-icon">ℹ️</span>
+                <span className="nav-icon"></span>
                 <span>About</span>
               </Link>
               <Link to="/whymp" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                <span className="nav-icon">❓</span>
+                <span className="nav-icon"></span>
                 <span>WhyMP</span>
               </Link>
-              <Link to="/gallery" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
+              {/* <Link to="/gallery" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
                 <span className="nav-icon">📸</span>
                 <span>Gallery</span>
               </Link>
               <Link to="/contact" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
                 <span className="nav-icon">📧</span>
                 <span>Contact</span>
-              </Link>
+              </Link> */}
             </div>
 
             <div className="mobile-auth-section">
               {!auth.isAuthenticated && (
                 <>
                   <NavLink to="/login" className="mobile-auth-btn login-btn" onClick={() => setIsMobileMenuOpen(false)}>
-                    <span className="btn-icon">🔐</span>
+                    <span className="btn-icon"></span>
                     <span>LogIn</span>
                   </NavLink>
                   <NavLink to="/signup" className="mobile-auth-btn signup-btn" onClick={() => setIsMobileMenuOpen(false)}>
-                    <span className="btn-icon">✨</span>
+                    <span className="btn-icon"></span>
                     <span>SignUp</span>
                   </NavLink>
                 </>
               )}
               {auth.isAuthenticated && (
-                <button onClick={() => { logout(); setIsMobileMenuOpen(false); }} className="mobile-auth-btn logout-btn">
+                <button onClick={() => { logoutHandler(); setIsMobileMenuOpen(false); }} className="mobile-auth-btn logout-btn">
                   <span className="btn-icon">👋</span>
                   <span>Logout</span>
                 </button>

@@ -12,4 +12,5 @@ router.get("/logout",handlecookieereset);
 router.get("/verify",onlyForLoggedINUsers,handeVerifyUser);
 router.get("/:id",handeGetUser);
 
+
 module.exports = router;

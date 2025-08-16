@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema({
     },
     phoneno: {
         type:Number,
-        unique : true,
+        // unique : true,
     },
     email: {
         type:String,
@@ -20,7 +20,7 @@ const userSchema = mongoose.Schema({
     
     role : {
         type : String,
-        enum : ["user","admin"],
+        enum : ["user","admin123#*"],
         default : "user",
     },
     createdAt : {

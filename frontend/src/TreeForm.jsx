@@ -92,7 +92,8 @@ export default function TreeForm() {
   
 
   return (
-    <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center', padding: '1rem' }}>
+    <div style={{ marginTop: '84px', display: 'flex', justifyContent: 'center', padding: '1rem' }}>
+
       <form
         onSubmit={handleSubmit}
         style={{
@@ -110,7 +111,7 @@ export default function TreeForm() {
       >
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-          <h2 style={{ color: '#4CAF50', marginBottom: '0.5rem' }}>🌱 Tree Plantation Registration</h2>
+          <h2 style={{ color: '#4CAF50', marginBottom: '0.5rem',fontSize:'25px' }}>🌱 Tree Plantation Registration</h2>
           <p style={{ color: '#ccc', fontSize: '1.1rem' }}>Register to become a part of this mission</p>
         </div>
 

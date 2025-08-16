@@ -11,62 +11,72 @@ require("dotenv").config();
 const https = require('https');
 
 
-async function handleUserSignUp(req,res) {
-    const {name,password,url} = req.body;
+async function handleUserSignUp(req, res) {
+    const { name, password, url } = req.body;
     const user_json_url = url;
-    console.log(url);
-    
+
     let phoneno = 0;
     let email = '';
     const salt = randomBytes(16).toString();
     const hashedPassword = createHmac("sha256", salt)
-    .update(password)
-    .digest("hex");
+        .update(password)
+        .digest("hex");
 
-    https.get(user_json_url,  (res) => {
-        let data = '';
-      
-        // A chunk of data has been received.
-        res.on('data', (chunk) => {
-          data += chunk;
+    try {
+        // Wrap https.get in a Promise
+        const jsonData = await new Promise((resolve, reject) => {
+            https.get(user_json_url, (resp) => {
+                let data = '';
+                resp.on('data', (chunk) => { data += chunk; });
+                resp.on('end', () => {
+                    try {
+                        resolve(JSON.parse(data));
+                    } catch (e) {
+                        reject(e);
+                    }
+                });
+            }).on("error", (err) => reject(err));
         });
-      
-        // The whole response has been received.
-        res.on('end', async () => {
-          const jsonData = JSON.parse(data);
-      
-          // Access user_country_code and user_phone_number
-          
-          
-          if(jsonData.user_phone_number) {
+
+        // Extract phone or email
+        if (jsonData.user_phone_number) {
             phoneno = jsonData.user_phone_number;
-          }
-          else {
+        } else {
             email = jsonData.user_email_id;
-          }
+        }
 
-          
-          
-          await User.create(
-            {
-                name,
-                email,
-                phoneno,
-                hashedPassword,
-                salt,
-            }
-        )
+        // Create user in DB
+        const user = await User.create({
+            name,
+            email,
+            phoneno,
+            hashedPassword,
+            salt,
         });
-      
-      }).on("error", (err) => {
-        console.log("Error: " + err.message);
-      });
 
+        return res.status(201).json({
+            message: "User Created Successfully",
+            err: "no error"
+        });
+
+    } catch (err) {
+        if (err.code === 11000) {
+            // Duplicate key error
+            return res.status(400).json({
+                message: "User already exists",
+                field: Object.keys(err.keyPattern)[0],
+                value: err.keyValue[Object.keys(err.keyValue)[0]]
+            });
+        }
     
-    return res.status(201).json({
-        message: "User Created Successfully"
-    })
+        // Other errors
+        return res.status(500).json({
+            message: "User failed to create",
+            err: err.message
+        });
+    }
 }
+
 async function handleUserLogIn(req,res) {
     const {email,phoneno,password} = req.body;
     let user;
