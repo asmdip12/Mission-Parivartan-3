@@ -18,7 +18,7 @@ const app = express();
 const PORT = 8000;
 
 app.use(cors({
-  origin: "http://localhost:5173",   
+  origin: "https://mission-parivartan3.vercel.app",   
   credentials: true                 
 }));
 app.use(express.json());
