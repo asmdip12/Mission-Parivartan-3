@@ -24,7 +24,7 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 app.use(cors({
-  origin: "https://mission-parivartan-3.vercel.app/",
+  origin: "https://mission-parivartan3.vercel.app/",
   credentials: true
 }));
 app.use(express.json());
