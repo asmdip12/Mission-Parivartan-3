@@ -64,10 +64,7 @@ const MissionParivartan = () => {
         : "110px", 
       padding: 0,
     },
-
-    
-
-    
+// gh
     // Hero section styles
     hero: {
       background: 'linear-gradient(135deg, #4caf50, #66bb6a)',
