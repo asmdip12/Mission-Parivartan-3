@@ -20,118 +20,145 @@ export default function LoginForm() {
         { withCredentials: true }
       );
       alert('Login successful!');
-      // console.log(response.data);
-
       login(response.data.user);
-
       navigate('/TreeForm');
     } catch (err) {
       alert('Login failed!');
-      // console.error(err.response?.data || err.message);
     }
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-    }}>
+    <div
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexWrap: 'wrap', // ✅ allow wrapping on smaller screens
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        fontFamily:
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+        padding: '1rem' // ✅ spacing for mobile
+      }}
+    >
       {/* Background Pattern */}
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: `
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: `
           radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 0%, transparent 50%),
           radial-gradient(circle at 75% 75%, rgba(255,255,255,0.05) 0%, transparent 50%)
         `,
-        zIndex: 1
-      }}></div>
-      
+          zIndex: 1
+        }}
+      ></div>
+
       {/* Left Side - Branding */}
-      <div style={{
-        flex: 1,
-        padding: '3rem',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        maxWidth: '500px',
-        zIndex: 2
-      }}>
-        <div style={{
+      <div
+        style={{
+          flex: 1,
+          padding: '2rem',
           display: 'flex',
-          alignItems: 'center',
-          marginBottom: '2rem'
-        }}>
-          <div style={{
-            width: '48px',
-            height: '48px',
-            background: 'rgba(255,255,255,0.2)',
-            borderRadius: '12px',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'flex-start',
+          maxWidth: '500px',
+          zIndex: 2,
+          minWidth: '280px', // ✅ shrink safely
+          width: '100%', // ✅ full width on mobile
+          textAlign: 'left',
+          marginTop: '2rem',
+        }}
+      >
+        <div
+          style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '24px',
-            marginRight: '12px',
-            backdropFilter: 'blur(10px)'
-          }}>
+            marginBottom: '1.5rem'
+          }}
+        >
+          <div
+            style={{
+              width: '48px',
+              height: '48px',
+              background: 'rgba(255,255,255,0.2)',
+              borderRadius: '12px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '24px',
+              marginRight: '12px',
+              backdropFilter: 'blur(10px)'
+            }}
+          >
             🌱
           </div>
           <div>
-            <h1 style={{
-              color: 'white',
-              fontSize: '24px',
-              fontWeight: '700',
-              margin: 0,
-              lineHeight: 1.2
-            }}>
+            <h1
+              style={{
+                color: 'white',
+                fontSize: '22px',
+                fontWeight: '700',
+                margin: 0,
+                lineHeight: 1.2
+              }}
+            >
               Mission<br />Parivartan
             </h1>
           </div>
         </div>
-        
-        <h2 style={{
-          color: 'rgba(255,255,255,0.9)',
-          fontSize: '42px',
-          fontWeight: '300',
-          margin: 0,
-          marginBottom: '1rem',
-          lineHeight: 1.2
-        }}>
+
+        <h2
+          style={{
+            color: 'rgba(255,255,255,0.9)',
+            fontSize: '32px', // ✅ smaller for mobile
+            fontWeight: '300',
+            margin: 0,
+            marginBottom: '1rem',
+            lineHeight: 1.2
+          }}
+        >
           Welcome Back
         </h2>
-        
-        <p style={{
-          color: 'rgba(255,255,255,0.7)',
-          fontSize: '18px',
-          margin: 0,
-          lineHeight: 1.5
-        }}>
-          Continue your journey with us. Sign in to access your account and explore new possibilities.
+
+        <p
+          style={{
+            color: 'rgba(255,255,255,0.7)',
+            fontSize: '16px',
+            margin: 0,
+            lineHeight: 1.5
+          }}
+        >
+          Continue your journey with us. Sign in to access your account and
+          explore new possibilities.
         </p>
       </div>
-      
+
       {/* Right Side - Login Form */}
-      <div style={{
-        flex: 1,
-        maxWidth: '480px',
-        margin: '2rem',
-        zIndex: 2
-      }}>
-        <div style={{
-          background: 'rgba(255, 255, 255, 0.95)',
-          backdropFilter: 'blur(20px)',
-          borderRadius: '24px',
-          padding: '3rem',
-          boxShadow: '0 25px 50px rgba(0,0,0,0.2)'
-        }}>
+      <div
+        style={{
+          flex: 1,
+          maxWidth: '480px',
+          margin: '1rem',
+          zIndex: 2,
+          minWidth: '280px', // ✅ fits smaller screens
+          width: '100%' // ✅ full width on mobile
+        }}
+      >
+        <div
+          style={{
+            background: 'rgba(255, 255, 255, 0.95)',
+            backdropFilter: 'blur(20px)',
+            borderRadius: '24px',
+            padding: '2rem',
+            boxShadow: '0 25px 50px rgba(0,0,0,0.2)'
+          }}
+        >
+          
           <div style={{ marginBottom: '2rem' }}>
             <h3 style={{
               fontSize: '28px',
@@ -394,3 +421,4 @@ export default function LoginForm() {
     </div>
   );
 }  
+

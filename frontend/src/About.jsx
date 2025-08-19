@@ -7,6 +7,7 @@ const MissionParivartan = () => {
   const [activeSection, setActiveSection] = useState('');
   const { auth } = useAuth();
   const navigate = useNavigate();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const handleClick = () => {
     if (auth.user) {
@@ -25,6 +26,9 @@ const MissionParivartan = () => {
         if (window.scrollY >= sectionTop) {
           current = section.getAttribute('id');
         }
+        const handleResize = () => setWindowWidth(window.innerWidth);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
       });
       
       setActiveSection(current);
@@ -52,9 +56,16 @@ const MissionParivartan = () => {
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif',
       lineHeight: '1.6',
       color: '#333',
-      margin: 0,
+      marginTop:
+      windowWidth < 480
+        ? "-15px" // mobile
+        : windowWidth < 768
+        ? "-10px" // tablet
+        : "110px", 
       padding: 0,
     },
+
+    
 
     
     // Hero section styles
